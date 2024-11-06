@@ -6,8 +6,21 @@ import { motion, AnimateSharedLayout } from "framer-motion";
 import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
 
-// parent Card
+// Helper function to generate date strings starting two months back with weekly intervals
+function getPastDates(numDates) {
+  const dates = [];
+  let currentDate = new Date();
+  currentDate.setMonth(currentDate.getMonth() - 2); // Move two months back from today
 
+  for (let i = 0; i < numDates; i++) {
+    dates.push(currentDate.toISOString());
+    currentDate.setDate(currentDate.getDate() + 7); // Move forward by 7 days (1 week)
+  }
+
+  return dates;
+}
+
+// Parent Card component
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);
   return (
@@ -21,7 +34,7 @@ const Card = (props) => {
   );
 };
 
-// Compact Card
+// Compact Card component
 function CompactCard({ param, setExpanded }) {
   const Png = param.png;
   return (
@@ -44,13 +57,13 @@ function CompactCard({ param, setExpanded }) {
       <div className="detail">
         <Png />
         <span>{param.value}</span>
-        <span>Last 2 month</span>
+        <span>Last 2 months</span>
       </div>
     </motion.div>
   );
 }
 
-// Expanded Card
+// Expanded Card component
 function ExpandedCard({ param, setExpanded }) {
   const data = {
     options: {
@@ -90,16 +103,7 @@ function ExpandedCard({ param, setExpanded }) {
       },
       xaxis: {
         type: "datetime",
-        categories: [
-          "2024-07-15T00:00:00.000Z",
-"2024-07-22T00:00:00.000Z",
-"2024-07-29T00:00:00.000Z",
-"2024-08-05T00:00:00.000Z",
-"2024-08-12T00:00:00.000Z",
-"2024-08-19T00:00:00.000Z",
-"2024-08-26T00:00:00.000Z"
-
-        ],
+        categories: getPastDates(7), // Generates 7 weekly date points starting from two months back
       },
     },
   };
@@ -116,7 +120,7 @@ function ExpandedCard({ param, setExpanded }) {
       <div style={{ alignSelf: "flex-end", cursor: "pointer", color: "white" }}>
         <UilTimes onClick={setExpanded} />
       </div>
-        <span>{param.title}</span>
+      <span>{param.title}</span>
       <div className="chartContainer">
         <Chart options={data.options} series={param.series} type="area" />
       </div>

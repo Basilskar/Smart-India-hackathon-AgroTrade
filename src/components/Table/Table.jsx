@@ -8,35 +8,41 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./Table.css";
 
-// Helper function to create table rows
-function createData(name, trackingId, price, status, date) {
-  return { name, trackingId, price, status, date };
+function getCurrentDate() {
+  const today = new Date();
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
+  return today.toLocaleDateString('en-GB', options); // Example format: "6 Nov 2024"
 }
 
-// Sample data for 22 commodities
+// Helper function to create table rows
+function createData(name, trackingId, price, status) {
+  return { name, trackingId, price, status, date: getCurrentDate() };
+}
+
+// Sample data for 22 commodities with the current date
 const rows = [
-  createData("Rice", 100123, "₹25/kg", "Approved", "9 Sep 2024"),
-  createData("Wheat", 100124, "₹30/kg", "Pending", "9 Sep 2024"),
-  createData("Corn", 100125, "₹28/kg", "Delivered", "9 Sep 2024"),
-  createData("Barley", 100126, "₹22/kg", "Approved", "9 Sep 2024"),
-  createData("Millet", 100127, "₹18/kg", "Pending", "9 Sep 2024"),
-  createData("Soybeans", 100128, "₹35/kg", "Delivered", "9 Sep 2024"),
-  createData("Peas", 100129, "₹40/kg", "Approved", "9 Sep 2024"),
-  createData("Cotton", 100130, "₹130/kg", "Pending", "9 Sep 2024"),
-  createData("Sugarcane", 100131, "₹55/quintal", "Approved", "9 Sep 2024"),
-  createData("Coffee", 100132, "₹320/kg", "Delivered", "9 Sep 2024"),
-  createData("Tea", 100133, "₹360/kg", "Approved", "9 Sep 2024"),
-  createData("Tobacco", 100134, "₹230/kg", "Pending", "9 Sep 2024"),
-  createData("Groundnut", 100135, "₹75/kg", "Delivered", "9 Sep 2024"),
-  createData("Sunflower", 100136, "₹65/kg", "Approved", "9 Sep 2024"),
-  createData("Potato", 100137, "₹12/kg", "Pending", "9 Sep 2024"),
-  createData("Tomato", 100138, "₹18/kg", "Delivered", "9 Sep 2024"),
-  createData("Onion", 100139, "₹15/kg", "Approved", "9 Sep 2024"),
-  createData("Carrot", 100140, "₹28/kg", "Pending", "9 Sep 2024"),
-  createData("Garlic", 100141, "₹210/kg", "Delivered", "9 Sep 2024"),
-  createData("Ginger", 100142, "₹190/kg", "Approved", "9 Sep 2024"),
-  createData("Chili", 100143, "₹420/kg", "Pending", "9 Sep 2024"),
-  createData("Turmeric", 100144, "₹270/kg", "Delivered", "9 Sep 2024"),
+  createData("Rice", 100123, "₹3200/quintal", "Approved"),
+  createData("Wheat", 100124, "₹2900/quintal", "Pending"),
+  createData("Corn", 100125, "₹2200/quintal", "Delivered"),
+  createData("Barley", 100126, "₹2100/quintal", "Approved"),
+  createData("Millet", 100127, "₹2000/quintal", "Pending"),
+  createData("Soybeans", 100128, "₹4200/quintal", "Delivered"),
+  createData("Peas", 100129, "₹3600/quintal", "Approved"),
+  createData("Cotton", 100130, "₹5900/quintal", "Pending"),
+  createData("Sugarcane", 100131, "₹400/quintal", "Approved"),
+  createData("Coffee", 100132, "₹26000/quintal", "Delivered"),
+  createData("Tea", 100133, "₹24000/quintal", "Approved"),
+  createData("Tobacco", 100134, "₹15000/quintal", "Pending"),
+  createData("Groundnut", 100135, "₹5500/quintal", "Delivered"),
+  createData("Sunflower", 100136, "₹5100/quintal", "Approved"),
+  createData("Potato", 100137, "₹1000/quintal", "Pending"),
+  createData("Tomato", 100138, "₹1400/quintal", "Delivered"),
+  createData("Onion", 100139, "₹1800/quintal", "Approved"),
+  createData("Carrot", 100140, "₹1200/quintal", "Pending"),
+  createData("Garlic", 100141, "₹12000/quintal", "Delivered"),
+  createData("Ginger", 100142, "₹8000/quintal", "Approved"),
+  createData("Chili", 100143, "₹15000/quintal", "Pending"),
+  createData("Turmeric", 100144, "₹7000/quintal", "Delivered"),
 ];
 
 // Function to handle dynamic row styles based on status
